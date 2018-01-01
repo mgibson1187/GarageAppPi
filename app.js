@@ -1,10 +1,9 @@
-// get node express modules
+// get modules
 var express = require('express');
 var app = express();
-
-// get socket.io modules
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var _ = require('lodash');
 
 // get config file
 var config = require('./config');
@@ -43,11 +42,14 @@ relay.writeSync(1);
 
 // door state
 var door = (state) => {
-	state: null
+	state = {
+		current: null
+	}
 }
 
 // watch sensor + websocket
 sensor.watch((err, state) => {
+	// _.assign()
 	console.log('watch', door);
 });
 
