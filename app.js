@@ -48,14 +48,18 @@ var state = {
 // watch sensor + websocket
 sensor.watch((err, state) => {
 	_.set(state, 'current', state);
+	console.log('watch', state);
 	// io.sockets.emit('recieve', {
 	// 	state: sensor.readSync()
 	// });
 });
 
 io.on('connection', (socket) => {
-	socket.emit('recieve', {
-		state: state.current
+	socket.emit('recieve', (data) => {
+		console.log('watch', state);
+		data = {
+			state: state.current
+		}
 	});
 	socket.on('reply', () => {
 		relay.writeSync(0);
