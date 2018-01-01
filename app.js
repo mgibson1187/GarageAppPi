@@ -52,8 +52,8 @@ var door = {
 
 
 io.on('connection', (socket) => {
-	socket.emit('recieve', {
-		state: door.state
+	socket.emit('recieve', (state) => {
+		state = {state: 1};
 	});
 });
 
