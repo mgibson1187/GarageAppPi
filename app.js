@@ -47,7 +47,7 @@ var state = {
 
 // watch sensor + websocket
 sensor.watch((err, state) => {
-	state.current
+	_.set(state, 'current', state);
 	// io.sockets.emit('recieve', {
 	// 	state: sensor.readSync()
 	// });
@@ -55,7 +55,7 @@ sensor.watch((err, state) => {
 
 io.on('connection', (socket) => {
 	socket.emit('recieve', {
-		state: sensor.readSync()
+		state: state.current
 	});
 	socket.on('reply', () => {
 		relay.writeSync(0);
