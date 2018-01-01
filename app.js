@@ -6,8 +6,11 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+// get config file
+var config = require('./config');
+
 // setup port
-app.set('port', process.env.PORT || 8080); // app.set('port', process.argv[2]);
+app.set('port', process.env.PORT || config.client.port); // app.set('port', process.argv[2]);
 
 // **************************************************************************
 // ** Utility Functions *****************************************************
