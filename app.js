@@ -42,12 +42,12 @@ relay.writeSync(1);
 
 // door state
 var door = {
-	current: null
+	state: null
 }
 
 // watch sensor + websocket
 sensor.watch((err, state) => {
-	// _.assign()
+	_.assign(door, state);
 	console.log('watch', door);
 });
 
