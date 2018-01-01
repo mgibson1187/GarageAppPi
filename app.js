@@ -66,7 +66,7 @@ io.on('connection', function(socket){
 
 // Start server
 http.listen(app.get('port'), function(){
-	console.log('Site started on http://' + config.client.port + ':' + app.get('port') + ' press Ctrl-C to terminate.');
+	console.log('Site started on http://' + config.client.host + ':' + app.get('port') + ' press Ctrl-C to terminate.');
 });
 
 module.exports = app;
