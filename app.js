@@ -56,7 +56,7 @@ sensor.watch((err, state) => {
 
 io.on('connection', (socket) => {
 	socket.emit('recieve', (data) => {
-		console.log('watch', state);
+		console.log('socket', state);
 		data = {
 			state: state.current
 		}
