@@ -1,0 +1,69 @@
+// get node express modules
+var express = require('express');
+var app = express();
+
+// get socket.io modules
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
+// setup port
+app.set('port', process.env.PORT || 8080); // app.set('port', process.argv[2]);
+
+// **************************************************************************
+// ** Utility Functions *****************************************************
+// **************************************************************************
+
+// Sleep Function
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
+
+// **************************************************************************
+// **************************************************************************
+
+// **************************************************************************
+// ** GPIO Setup ************************************************************
+// **************************************************************************
+
+var GPIO = require('onoff').Gpio;
+
+var relay = new GPIO(3, 'out');
+var led = new GPIO(4, 'out');
+var sensor = new GPIO(17, 'in', 'both');
+
+// start relay off
+relay.writeSync(1);
+
+// watch sensor + websocket
+sensor.watch(function(err, state) {
+	led.writeSync(sensor.readSync());
+	io.sockets.emit('recieve', {
+		state: sensor.readSync()
+	});
+});
+
+io.on('connection', function(socket){
+	socket.emit('recieve', {
+		state: sensor.readSync()
+	});
+	socket.on('reply', function(){
+		relay.writeSync(0);
+		sleep(250);
+		relay.writeSync(1);
+	});
+});
+
+// **************************************************************************
+// **************************************************************************
+
+// Start server
+http.listen(app.get('port'), function(){
+	console.log('Site started on http://garagedoorpi:' + app.get('port') + ' press Ctrl-C to terminate.');
+});
+
+module.exports = app;
