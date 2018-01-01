@@ -36,7 +36,6 @@ function sleep(milliseconds) {
 var GPIO = require('onoff').Gpio;
 
 var relay = new GPIO(3, 'out');
-var led = new GPIO(4, 'out');
 var sensor = new GPIO(17, 'in', 'both');
 
 // start relay off
@@ -44,7 +43,6 @@ relay.writeSync(1);
 
 // watch sensor + websocket
 sensor.watch(function(err, state) {
-	led.writeSync(sensor.readSync());
 	io.sockets.emit('recieve', {
 		state: sensor.readSync()
 	});
