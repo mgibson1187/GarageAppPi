@@ -42,17 +42,17 @@ var sensor = new GPIO(17, 'in', 'both');
 relay.writeSync(1);
 
 // watch sensor + websocket
-sensor.watch(function(err, state) {
+sensor.watch((err, state) => {
 	io.sockets.emit('recieve', {
 		state: sensor.readSync()
 	});
 });
 
-io.on('connection', function(socket){
+io.on('connection', (socket) => {
 	socket.emit('recieve', {
 		state: sensor.readSync()
 	});
-	socket.on('reply', function(){
+	socket.on('reply', () => {
 		relay.writeSync(0);
 		sleep(250);
 		relay.writeSync(1);
