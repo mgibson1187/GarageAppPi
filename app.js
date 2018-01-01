@@ -1,10 +1,9 @@
-// get node express modules
+// get modules
 var express = require('express');
 var app = express();
-
-// get socket.io modules
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var _ = require('lodash');
 
 // get config file
 var config = require('./config');
@@ -41,11 +40,17 @@ var sensor = new GPIO(17, 'in', 'both');
 // start relay off
 relay.writeSync(1);
 
+// door state object
+var state = {
+	current: null
+}
+
 // watch sensor + websocket
 sensor.watch((err, state) => {
-	io.sockets.emit('recieve', {
-		state: sensor.readSync()
-	});
+	state.current
+	// io.sockets.emit('recieve', {
+	// 	state: sensor.readSync()
+	// });
 });
 
 io.on('connection', (socket) => {
