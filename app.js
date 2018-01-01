@@ -41,10 +41,8 @@ var sensor = new GPIO(17, 'in', 'both');
 relay.writeSync(1);
 
 // door state
-var door = (state) => {
-	state = {
-		current: null
-	}
+var door = {
+	current: null
 }
 
 // watch sensor + websocket
