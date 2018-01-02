@@ -47,7 +47,7 @@ function Foo() {
 	sensor.watch((state) => {
 		// door state
 		console.log('watch', state);
-		self.state = state;
+		return self.state = state;
 	});
 	this.state = state;
 }
