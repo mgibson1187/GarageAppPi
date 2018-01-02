@@ -47,7 +47,9 @@ var door = {
   }
 };
 
-sensor.watch((err, state) => {});
+sensor.watch((err, state) => {
+	door.change = sensor.readSync();
+});
 
 door.change = sensor.readSync();
 
