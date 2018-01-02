@@ -47,7 +47,7 @@ var door = {
 
 // watch sensor + websocket
 console.log(sensor.watch((state) => {
-	state;
+	return state;
 }));
 
 io.on('connection', (socket) => {
