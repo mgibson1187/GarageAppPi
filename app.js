@@ -44,6 +44,7 @@ relay.writeSync(1);
 function Foo() {
 	sensor.watch((state) => {
 		// door state
+		console.log('watch', state);
 		this.state = state;
 	});
 }
