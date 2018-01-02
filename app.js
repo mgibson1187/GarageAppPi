@@ -51,7 +51,7 @@ console.log('before', door.state);
 
 sensor.watch((err, state) => {
 	console.log('watch', state);
-	door.change(state);
+	door.change = state;
 });
 
 console.log('after', door.state);
