@@ -41,11 +41,13 @@ var sensor = new GPIO(17, 'in', 'both');
 relay.writeSync(1);
 
 var door = {
-  state: 1,
+  state: null,
   set change(x) {
     this.state = x;
   }
 };
+
+door.change = 1;
 
 sensor.watch((err, state) => {
 	console.log('watch', state);
