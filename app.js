@@ -47,10 +47,9 @@ var door = {
   }
 };
 
-door.change = 1;
-
 sensor.watch((err, state) => {
 	console.log('watch', state);
+	door.change = state;
 });
 
 io.on('connection', (socket) => {
