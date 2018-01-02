@@ -44,6 +44,7 @@ io.on('connection', (socket) => {
 	var Door = {
 		getState: function() {
 			sensor.watch((err, state) => {});
+			console.log(sensor.readSync());
 			return sensor.readSync();
 		}
 	}
