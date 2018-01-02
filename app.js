@@ -53,7 +53,7 @@ var door = {
 
 io.on('connection', (socket) => {
 	socket.emit('recieve', (state) => {
-		state = {state: 1};
+		return {state: 1};
 	});
 });
 
