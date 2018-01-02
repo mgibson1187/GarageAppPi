@@ -52,11 +52,7 @@ sensor.watch((err, state) => {
 });
 
 io.on('connection', (socket) => {
-	socket.emit('recieve', () => {
-		console.log('socket sensor', sensor.readSync());
-		console.log('socket door', door.state);
-		return {state: sensor.readSync()};
-	});
+	socket.emit('recieve', door)
 });
 
 io.on('connection', (socket) => {
