@@ -43,6 +43,7 @@ relay.writeSync(1);
 // watch sensor + websocket
 sensor.watch((err, state) => {
 	console.log('watch', state);
+	return;
 });
 
 console.log(sensor.readSync());
