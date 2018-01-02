@@ -52,8 +52,9 @@ var door = {
 
 
 io.on('connection', (socket) => {
-	socket.emit('recieve', (state) => {
-		return 1;
+	socket.emit('recieve', () => {
+		console.log(sensor.readSync());
+		return {state: sensor.readSync()};
 	});
 });
 
