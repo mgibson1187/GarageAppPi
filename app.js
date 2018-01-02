@@ -40,18 +40,27 @@ var sensor = new GPIO(17, 'in', 'both');
 // start relay off
 relay.writeSync(1);
 
-// watch sensor + websocket
+var door = {
+  state: null,
+  set change(x) {
+    this.state = x;
+  }
+};
+
+console.log('before', door.state);
+
 sensor.watch((err, state) => {
 	console.log('watch', state);
-	return;
+	door.change(state);
 });
 
-console.log(sensor.readSync());
+console.log('after', door.state);
 
 io.on('connection', (socket) => {
+	// watch sensor + websocket
 	socket.emit('recieve', {
-		state: sensor.readSync()
-	})
+		state: door.state
+	});
 });
 
 io.on('connection', (socket) => {
