@@ -50,6 +50,10 @@ io.on('connection', (socket) => {
 		});
 	});
 
+	socket.emit('recieve', {
+		state: sensor.readSync()
+	});
+
 	socket.on('disconnect', () => {
 		console.log('A user disconnected');
  });
