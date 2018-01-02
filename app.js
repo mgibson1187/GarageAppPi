@@ -41,7 +41,7 @@ var sensor = new GPIO(17, 'in', 'both');
 relay.writeSync(1);
 
 // watch sensor + websocket
-sensor.watch((state) => {
+sensor.watch((err, state) => {
 	console.log('watch', state);
 });
 
