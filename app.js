@@ -50,10 +50,10 @@ var door = {
 sensor.watch((err, state) => {});
 
 io.on('connection', (socket) => {
-	door.change = sensor.readSync();
 	// watch sensor + websocket
-	socket.emit('recieve', {
-		state: door.state
+	socket.emit('recieve', () => {
+		door.change = sensor.readSync();
+		return {state: door.state};
 	});
 });
 
