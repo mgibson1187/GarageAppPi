@@ -46,9 +46,11 @@ var door = {
 }
 
 // watch sensor + websocket
-console.log(sensor.watch((state) => {
-	return state;
-}));
+sensor.watch((state) => {
+	door.state = state;
+});
+
+console.log('door', door);
 
 io.on('connection', (socket) => {
 	socket.emit('recieve', door)
