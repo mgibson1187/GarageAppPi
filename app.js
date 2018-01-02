@@ -47,12 +47,14 @@ var door = {
 
 // watch sensor + websocket
 sensor.watch((err, state) => {
-	this.state = state;
+	console.log('watch', state);
+	door.state = state;
 });
 
 io.on('connection', (socket) => {
 	socket.emit('recieve', () => {
-		console.log(sensor.readSync());
+		console.log('socket sensor', sensor.readSync());
+		console.log('socket door', door.state);
 		return {state: sensor.readSync()};
 	});
 });
