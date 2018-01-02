@@ -43,9 +43,12 @@ relay.writeSync(1);
 io.on('connection', (socket) => {
 	var Door = {
 		state: null,
+		set changeState(newState) {
+
+		},
 		getState: function() {
 			sensor.watch((err, state) => {});
-			this.state = sensor.readSync();
+			this.changeState = sensor.readSync();
 		}
 	}
 
