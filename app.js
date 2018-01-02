@@ -43,12 +43,17 @@ relay.writeSync(1);
 io.on('connection', (socket) => {
 	console.log('A user connected');
 
+	function doorSetter(state) {
+		socket.emit('recieve', {
+			state: state
+		});
+	}
+
 	// watch sensor + websocket
 	sensor.watch((err, state) => {
-		socket.emit('recieve', {
-			state: sensor.readSync()
-		});
+		doorSetter(state);
 	});
+	doorSetter(sensor.readSync());
 
 	socket.emit('recieve', {
 		state: sensor.readSync()
