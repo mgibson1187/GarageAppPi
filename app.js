@@ -54,7 +54,7 @@ io.on('connection', (socket) => {
 	}	
 
 	socket.emit('recieve', {
-		state: door.watch()
+		state: door.watch
 	});
 });
 
