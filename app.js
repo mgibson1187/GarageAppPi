@@ -41,9 +41,10 @@ var sensor = new GPIO(17, 'in', 'both');
 relay.writeSync(1);
 
 io.on('connection', (socket) => {
+	sensor.watch((err, state) => {});
+	
 	var Door = {
 		getState: function() {
-			sensor.watch((err, state) => {});
 			console.log(sensor.readSync());
 			return sensor.readSync();
 		}
