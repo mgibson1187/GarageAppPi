@@ -49,6 +49,8 @@ function Foo() {
 	});
 }
 
+console.log(new Foo);
+
 io.on('connection', (socket) => {
 	socket.emit('recieve', new Foo)
 });
