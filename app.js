@@ -41,7 +41,7 @@ var sensor = new GPIO(17, 'in', 'both');
 relay.writeSync(1);
 
 var door = {
-  state: null,
+  state: 0,
   set change(x) {
     this.state = x;
   }
